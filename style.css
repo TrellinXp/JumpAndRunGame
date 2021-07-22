@@ -93,7 +93,7 @@
 
 .floor {
     background-color: green;
-    height: 167px;
+    height: 20vw;
     width: 100%;
 }
 
@@ -101,7 +101,7 @@
     height: 250px;
     width: 104px;
     position: relative;
-    top: -340px;
+    top: -44vh;
     left: 10px;
     z-index: 100;
 }
@@ -128,5 +128,24 @@ canvas {
   top: -28vh;
   left: 0.25vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  color: black;
+}
+
+.heart {
+  height: 2vh;
+  width: 2vh;
+  background-color: blue;
+}
+
+a {
+  margin-right: 2vw;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.cloud {
+  height: 40px;
+  width: 40px;
 }

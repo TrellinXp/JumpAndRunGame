@@ -7,13 +7,15 @@ class JumpAndRunController {
         this.canvas = document.getElementById('canvas');
         this.ctx = this.canvas.getContext('2d');  
 
-
         this.x = canvas.width;
         this.y = 0;
         this.addStartListener(); 
         this.addJumpListener();
-        this.startCreatingObstacles();
-        //this.startCreatingBackground(0, 0);
+        this.startCreatingBackground();
+        //this.createClouds();
+        this.addLifesLeft(this.game.numberOfLives);
+        //this.startCreatingObstacles();
+
         this.player = document.getElementById('player');
     }
 
@@ -21,9 +23,32 @@ class JumpAndRunController {
         let self = this;
         let start = document.getElementById('start');
         start.onclick = function () {
-            start.innerHTML = 'Restart';
-            //self.startCreatingBackground(0, 0);
+            const interval = setInterval(function() {
+                self.startCreatingObstacles();
+            }, 20);
         };
+    }
+
+    addLifesLeft(numberOfLives) {
+        console.log(numberOfLives);
+        let self = this;
+        //this.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
+        console.log(numberOfLives);
+
+        for(var count = 0; count < numberOfLives; count++) {
+            var img = new Image;
+            img.src = './img/heart.png';
+            self.ctx.drawImage(img, count * 10, 10, 20, 20);
+        }
+
+    }
+
+    createClouds() {
+        for(let count=0; count < 10; count) {
+            var clood = document.getElementById("cloud");
+            clood.display = 'block';
+            this.ctx.drawImage(clood, 0, 0, 20, 20);
+        }
     }
 
     addJumpListener() {
@@ -39,17 +64,10 @@ class JumpAndRunController {
         };  
     }
 
-    startCreatingBackground(x, y) {
-        const theCanvas = document.getElementById('canvas');
-        const ctx = theCanvas.getContext('2d');        
-        var img = new Image;
-        img.src = '/img/background.jpg';
-        img.classList.add('background');
-        ctx.drawImage(img, 0, this.y); 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        this.x -= 4;
-
-        setTimeout(this.startCreatingBackground, 100, x, y);
+    startCreatingBackground() {    
+        var self = this;
+        self.createRectangle(0, 0, canvas.width, canvas.height, '#03a9f457');
+        self.createRectangle(0, 123, canvas.width, canvas.height, 'green');
     }
 
     startCreatingObstacles() {
@@ -63,10 +81,10 @@ class JumpAndRunController {
     }
 
     moveObstacle(x, y, w, h, color) {
-        this.createObstacle(x, y, w, h, color);
+        this.createRectangle(x, y, w, h, color);
     }
     
-    createObstacle(x, y, w, h, color) {        
+    createRectangle(x, y, w, h, color) {        
         this.ctx.fillStyle = color;
         this.ctx.fillRect(x, y, w, h);
     }

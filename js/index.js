@@ -14,7 +14,7 @@ class JumpAndRunController {
         this.startCreatingBackground();
         this.createClouds();
         this.addLifesLeft(this.game.numberOfLives);
-        //this.startCreatingObstacles();
+        this.startCreatingObstacles();
 
         this.player = document.getElementById('player');
     }
@@ -64,7 +64,7 @@ class JumpAndRunController {
 
         this.ctx.drawImage(copiedCloud, 140, 0, 64, 64);
 
-        this.ctx.drawImage(copiedCloud, 180, 40, 64, 64);
+        //this.ctx.drawImage(copiedCloud, 180, 40, 64, 64);
 
         this.ctx.drawImage(copiedCloud, 230, 0, 64, 64);
     }
@@ -100,19 +100,40 @@ class JumpAndRunController {
 
     startCreatingObstacles() {
         var self = this;
-        let count = 0;
-
-        self.createRectangle(180, 120, 30, 30, 'brown');
-
-        const interval = setInterval(function() {
-            self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height, 'brown');
-            self.moveObstacle(180-count, 120, 30, 30, 'brown');
-            count++;            
-          }, 20);
+        self.moveReactangle(100, 92, 30, 30, 'blue');
+        self.createStairs(250, 93, 30, 30, 'black'); 
     }
 
-    moveObstacle(x, y, w, h, color) {
-        this.createRectangle(x, y, w, h, color);
+    moveReactangle(x, y, w, h, color) {
+        let self = this;
+        let count = 0;
+        const interval = setInterval(function() {
+            self.createRectangle(x-count, y, w+1, h+1, 'rgba(169,226, 251, 1)'); 
+            count++;
+            setTimeout(function() {
+                self.createRectangle(x-count, y+1, w, h, color);
+            }, 200)
+
+            count++;
+        }, 200);
+    }
+
+    moveStairs(x, y, w, h, color) { 
+        let self = this;          
+        let count = 0;
+        const interval = setInterval(function() {
+            self.createRectangle(x, y, w, h, 'rgba(169,226, 251, 1)');
+            self.createRectangle(x+30-count, y, w, h, 'rgba(169,226, 251, 1)');
+            self.createRectangle(x+30-count, y-1, w, h, 'rgba(169,226, 251, 1)');
+            count++;
+            /*setTimeout(function() {
+                self.createRectangle(x, y, w, h, 'black');
+                self.createRectangle(x+30-count, y, w, h, 'black');
+                self.createRectangle(x+30-count, y-1, w, h, 'black');
+            }, 10)*/
+
+            count++;
+        }, 10);
     }
     
     createRectangle(x, y, w, h, color) {        

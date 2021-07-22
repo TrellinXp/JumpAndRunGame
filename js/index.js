@@ -6,7 +6,6 @@ class JumpAndRunController {
 
         this.canvas = document.getElementById('canvas');
         this.ctx = this.canvas.getContext('2d');  
-
         this.x = canvas.width;
         this.y = 0;
         this.addStartListener(); 
@@ -15,8 +14,7 @@ class JumpAndRunController {
         this.createClouds();
         this.addLifesLeft(this.game.numberOfLives);
         this.startCreatingObstacles();
-
-        this.player = document.getElementById('player');
+        this.obstacles = [];
     }
 
     addStartListener() {
@@ -81,11 +79,12 @@ class JumpAndRunController {
 
     addJumpListener() {
         let self = this;
+        let player = document.getElementById('player');
         window.onkeydown = function(e) {
             switch (e.keyCode) {
                 case 38:  
-                    self.player.classList.remove('slide-bottom');       
-                    self.player.classList.add('slide-top');
+                    player.classList.remove('slide-bottom');       
+                    player.classList.add('slide-top');
                     setTimeout(self.slideBottom, 800); 
                     break;
             }
@@ -100,7 +99,7 @@ class JumpAndRunController {
 
     startCreatingObstacles() {
         var self = this;
-        self.moveReactangle(100, 92, 30, 30, 'blue');
+        self.moveReactangle(100, 92, 30, 30, 'black');
         self.createStairs(250, 93, 30, 30, 'black'); 
     }
 
@@ -112,8 +111,9 @@ class JumpAndRunController {
             count++;
             setTimeout(function() {
                 self.createRectangle(x-count, y+1, w, h, color);
+                self.obstacles.push(x + ' , '+y)
             }, 200)
-
+            console.log(self.obstacles);
             count++;
         }, 200);
     }
@@ -122,9 +122,11 @@ class JumpAndRunController {
         let self = this;          
         let count = 0;
         const interval = setInterval(function() {
+            /*
             self.createRectangle(x, y, w, h, 'rgba(169,226, 251, 1)');
             self.createRectangle(x+30-count, y, w, h, 'rgba(169,226, 251, 1)');
             self.createRectangle(x+30-count, y-1, w, h, 'rgba(169,226, 251, 1)');
+            */
             count++;
             /*setTimeout(function() {
                 self.createRectangle(x, y, w, h, 'black');

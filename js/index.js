@@ -21,9 +21,7 @@ class JumpAndRunController {
         let self = this;
         let start = document.getElementById('start');
         start.onclick = function () {
-            const interval = setInterval(function() {
-                self.startCreatingObstacles();
-            }, 20);
+            location.reload();
         };
     }
 

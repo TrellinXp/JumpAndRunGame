@@ -4,6 +4,10 @@ class JumpAndRunController {
     constructor() {
         this.game = new JumpAndRun();
 
+        this.canvas = document.getElementById('canvas');
+        this.ctx = this.canvas.getContext('2d');  
+
+
         this.x = canvas.width;
         this.y = 0;
         this.addStartListener(); 
@@ -52,23 +56,19 @@ class JumpAndRunController {
         var self = this;
         let count = 0;
         const interval = setInterval(function() {
-            count++;
+            self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height, 'brown');
             self.moveObstacle(180-count, 120, 30, 30, 'brown');
-          }, 100);
+            count++;            
+          }, 20);
     }
 
     moveObstacle(x, y, w, h, color) {
         this.createObstacle(x, y, w, h, color);
     }
     
-    createObstacle(x, y, w, h, color) {
-        const theCanvas = document.getElementById('canvas');
-        const ctx = theCanvas.getContext('2d');        
-        ctx.fillStyle = "#FF0000";
-
-        ctx.fillStyle = "blue";
-        ctx.clearRect(x, y, w, h);
-        ctx.fillRect(x, y, w, h);
+    createObstacle(x, y, w, h, color) {        
+        this.ctx.fillStyle = color;
+        this.ctx.fillRect(x, y, w, h);
     }
 
     slideBottom() {

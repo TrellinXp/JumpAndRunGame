@@ -1,6 +1,6 @@
 export class JumpAndRun {
     constructor() {
-
+        this.numberOfLives = 5;
     }
 
 }

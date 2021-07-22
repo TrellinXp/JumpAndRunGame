@@ -35,10 +35,15 @@ class JumpAndRunController {
         //this.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
         console.log(numberOfLives);
 
+        var heart = document.getElementById("heart");
+
+        let copiedHeart = heart.cloneNode(true);
+        console.log(copiedHeart);
+
         for(var count = 0; count < numberOfLives; count++) {
             var img = new Image;
             img.src = './img/heart.png';
-            self.ctx.drawImage(img, count * 10, 10, 20, 20);
+            self.ctx.drawImage(copiedHeart, (count * 14)+10, 5, 10, 10);
         }
 
     }
@@ -53,7 +58,7 @@ class JumpAndRunController {
         let width = clood.style.width;
         console.log(width);
 
-        this.ctx.drawImage(copiedCloud, 0, 0, 52, 64);
+        this.ctx.drawImage(copiedCloud, 10, 10, 52, 64);
 
         this.ctx.drawImage(copiedCloud, 60, 30, 64, 64);
 
@@ -96,6 +101,9 @@ class JumpAndRunController {
     startCreatingObstacles() {
         var self = this;
         let count = 0;
+
+        self.createRectangle(180, 120, 30, 30, 'brown');
+
         const interval = setInterval(function() {
             self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height, 'brown');
             self.moveObstacle(180-count, 120, 30, 30, 'brown');

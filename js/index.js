@@ -12,7 +12,7 @@ class JumpAndRunController {
         this.addStartListener(); 
         this.addJumpListener();
         this.startCreatingBackground();
-        //this.createClouds();
+        this.createClouds();
         this.addLifesLeft(this.game.numberOfLives);
         //this.startCreatingObstacles();
 
@@ -44,12 +44,35 @@ class JumpAndRunController {
     }
 
     createClouds() {
-        for(let count=0; count < 10; count) {
-            var clood = document.getElementById("cloud");
-            clood.display = 'block';
-            this.ctx.drawImage(clood, 0, 0, 20, 20);
-        }
+        var clood = document.getElementById("cloud");
+
+        let copiedCloud = clood.cloneNode(true);
+        console.log(copiedCloud);
+        copiedCloud.style.display = 'block';
+
+        let width = clood.style.width;
+        console.log(width);
+
+        this.ctx.drawImage(copiedCloud, 0, 0, 52, 64);
+
+        this.ctx.drawImage(copiedCloud, 60, 30, 64, 64);
+
+        this.ctx.drawImage(copiedCloud, 140, 0, 64, 64);
+
+        this.ctx.drawImage(copiedCloud, 180, 40, 64, 64);
+
+        this.ctx.drawImage(copiedCloud, 230, 0, 64, 64);
     }
+
+    clone(obj) {
+        if (null == obj || "object" != typeof obj) return obj;
+        var copy = obj.constructor();
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+        }
+        return copy;
+    }
+    
 
     addJumpListener() {
         let self = this;

@@ -93,7 +93,7 @@
 
 .floor {
     background-color: green;
-    height: 20vw;
+    height: 20vh;
     width: 100%;
 }
 
@@ -101,7 +101,7 @@
     height: 250px;
     width: 104px;
     position: relative;
-    top: -44vh;
+    top: -41vh;
     left: 10px;
     z-index: 100;
 }
@@ -125,7 +125,7 @@ canvas {
 
 .attribution {
   position: relative;
-  top: -28vh;
+  top: -26vh;
   left: 0.25vw;
   display: flex;
   flex-direction: row;
@@ -146,6 +146,7 @@ a {
 }
 
 .cloud {
-  height: 40px;
-  width: 40px;
+  height: 256px;
+  width: 256px;
+  display: none;
 }

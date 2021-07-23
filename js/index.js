@@ -89,23 +89,22 @@ class JumpAndRunController {
 
     startCreatingObstacles() {
         var self = this;
+        
         const interval = setInterval(function() {
-            self.moveReactangle(250, 92, 30, 30, 'black');
-        }, 5000);
+            self.moveReactangle(200, 92, 30, 30, 'black');
+        }, 7000);
     }
 
     moveReactangle(x, y, w, h, color) {
         let self = this;
         let count = 0;
         const interval = setInterval(function() {
-            self.createRectangle(x-count, y, w+1, h+1, 'rgba(169,226, 251, 1)'); 
+            self.createRectangle(x-(count /10), y, w+1, h+1, 'rgba(169,226, 251, 1)'); 
             count++;
-            setTimeout(function() {
-                self.createRectangle(x-count, y+1, w, h, color);
-                self.obstacles.push(x + ' , '+y);
-            }, 100)
+            self.createRectangle(x-(count /10), y+1, w, h, color);
+            self.obstacles.push(x + ' , '+y);
             count++;
-        }, 100);
+        }, 10);
     }
     
     createRectangle(x, y, w, h, color) {        

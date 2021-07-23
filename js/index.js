@@ -25,11 +25,7 @@ class JumpAndRunController {
     }
 
     addLifesLeft(numberOfLives) {
-        console.log(numberOfLives);
         let self = this;
-        //this.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
-        console.log(numberOfLives);
-
         var heart = document.getElementById("heart");
 
         let copiedHeart = heart.cloneNode(true);
@@ -93,8 +89,9 @@ class JumpAndRunController {
 
     startCreatingObstacles() {
         var self = this;
-        self.moveReactangle(100, 92, 30, 30, 'black');
-        self.moveStairs(250, 93, 30, 30, 'black'); 
+        const interval = setInterval(function() {
+            self.moveReactangle(250, 92, 30, 30, 'black');
+        }, 5000);
     }
 
     moveReactangle(x, y, w, h, color) {
@@ -109,26 +106,6 @@ class JumpAndRunController {
             }, 100)
             count++;
         }, 100);
-    }
-
-    moveStairs(x, y, w, h, color) { 
-        let self = this;          
-        let count = 0;
-        const interval = setInterval(function() {
-            /*
-            self.createRectangle(x, y, w, h, 'rgba(169,226, 251, 1)');
-            self.createRectangle(x+30-count, y, w, h, 'rgba(169,226, 251, 1)');
-            self.createRectangle(x+30-count, y-1, w, h, 'rgba(169,226, 251, 1)');
-            */
-            count++;
-            /*setTimeout(function() {
-                self.createRectangle(x, y, w, h, 'black');
-                self.createRectangle(x+30-count, y, w, h, 'black');
-                self.createRectangle(x+30-count, y-1, w, h, 'black');
-            }, 10)*/
-
-            count++;
-        }, 10);
     }
     
     createRectangle(x, y, w, h, color) {        

@@ -8,17 +8,16 @@ class JumpAndRunController {
         this.ctx = this.canvas.getContext('2d');  
         this.x = canvas.width;
         this.y = 0;
+        this.obstacles = [];
         this.addStartListener(); 
         this.addJumpListener();
         this.startCreatingBackground();
         this.createClouds();
         this.addLifesLeft(this.game.numberOfLives);
         this.startCreatingObstacles();
-        this.obstacles = [];
     }
 
     addStartListener() {
-        let self = this;
         let start = document.getElementById('start');
         start.onclick = function () {
             location.reload();
@@ -55,13 +54,8 @@ class JumpAndRunController {
         console.log(width);
 
         this.ctx.drawImage(copiedCloud, 10, 10, 52, 64);
-
         this.ctx.drawImage(copiedCloud, 60, 30, 64, 64);
-
         this.ctx.drawImage(copiedCloud, 140, 0, 64, 64);
-
-        //this.ctx.drawImage(copiedCloud, 180, 40, 64, 64);
-
         this.ctx.drawImage(copiedCloud, 230, 0, 64, 64);
     }
 
@@ -81,9 +75,11 @@ class JumpAndRunController {
         window.onkeydown = function(e) {
             switch (e.keyCode) {
                 case 38:  
-                    player.classList.remove('slide-bottom');       
+                    player.classList.remove('slide-bck-left');       
                     player.classList.add('slide-top');
+                    setTimeout(self.slideRight, 500);
                     setTimeout(self.slideBottom, 800); 
+                    setTimeout(self.slideLeft, 3000);
                     break;
             }
         };  
@@ -98,7 +94,7 @@ class JumpAndRunController {
     startCreatingObstacles() {
         var self = this;
         self.moveReactangle(100, 92, 30, 30, 'black');
-        self.createStairs(250, 93, 30, 30, 'black'); 
+        self.moveStairs(250, 93, 30, 30, 'black'); 
     }
 
     moveReactangle(x, y, w, h, color) {
@@ -109,11 +105,10 @@ class JumpAndRunController {
             count++;
             setTimeout(function() {
                 self.createRectangle(x-count, y+1, w, h, color);
-                self.obstacles.push(x + ' , '+y)
-            }, 200)
-            console.log(self.obstacles);
+                self.obstacles.push(x + ' , '+y);
+            }, 100)
             count++;
-        }, 200);
+        }, 100);
     }
 
     moveStairs(x, y, w, h, color) { 
@@ -142,8 +137,18 @@ class JumpAndRunController {
     }
 
     slideBottom() {
-        this.player.classList.remove('slide-top');
+        this.player.classList.remove('slide-fwd-right');
         this.player.classList.add('slide-bottom');
+    }
+
+    slideRight() {
+        this.player.classList.remove('slide-top');
+        this.player.classList.add('slide-fwd-right');
+    }
+
+    slideLeft() {
+        this.player.classList.remove('slide-bottom');
+        this.player.classList.add('slide-bck-left');
     }
 }
 
